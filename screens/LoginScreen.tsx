@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
-import { Alert, Button, StyleSheet, Text, View } from 'react-native';
+import { Alert, Text, View } from 'react-native';
 import { TextInput, TouchableHighlight, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { buttonStyle, formStyle, inputStyle, utilStyle } from '../styles';
 import { ScreenProps } from './ScreenParamList';
 
-interface Credentials {
+export interface LoginCredentials {
     username: string;
     password: string;
 }
 
 export default function loginscreen({ navigation, route }: ScreenProps<'Login'>) {
-    const [credentials, setCredential] = useState<Credentials>({
-        username: '',
-        password: ''
+    const [credentials, setCredential] = useState<LoginCredentials>({
+        username: 'topzdev',
+        password: 'dev123'
     })
 
 
-    const onChange = (prop: keyof Credentials, value: string) => {
+    const onChange = (prop: keyof LoginCredentials, value: string) => {
         setCredential(prevValue => ({ ...prevValue, [prop]: value }))
     }
 
@@ -24,9 +24,10 @@ export default function loginscreen({ navigation, route }: ScreenProps<'Login'>)
         const { username, password } = credentials;
 
         if (username === 'topzdev' && password === 'dev123') {
-            return navigation.navigate('Home')
+            navigation.navigate('Home')
+        } else {
+            Alert.alert('Error', 'Your username and password is invalid')
         }
-        Alert.alert('Error', 'Your username and password is invalid')
     }
 
     return (
@@ -37,7 +38,7 @@ export default function loginscreen({ navigation, route }: ScreenProps<'Login'>)
                 <TextInput style={inputStyle.primaryInput} value={credentials.username} placeholder="Enter your username here" onChangeText={text => onChange('username', text)} />
             </View>
             <View style={formStyle.formGroup}>
-                <TextInput style={inputStyle.primaryInput} value={credentials.password} placeholder="Enter your password here" onChangeText={text => onChange('password', text)} />
+                <TextInput secureTextEntry={true} textContentType="password" autoCompleteType="password" style={inputStyle.primaryInput} value={credentials.password} placeholder="Enter your password here" onChangeText={text => onChange('password', text)} />
             </View>
             <View style={formStyle.formGroup}>
                 <TouchableHighlight style={buttonStyle.primaryButton} onPress={onLogin}>
@@ -45,12 +46,10 @@ export default function loginscreen({ navigation, route }: ScreenProps<'Login'>)
                 </TouchableHighlight>
             </View>
             <View style={formStyle.formGroup}>
-                <TouchableWithoutFeedback style={utilStyle.link} onPress={() => navigation.navigate('Register')}>
-                    <Text style={{ textAlign: 'center', color: '#3498db' }}>No account yet? Click to here to sign up.</Text>
+                <TouchableWithoutFeedback onPress={() => navigation.navigate('Register')}>
+                    <Text style={utilStyle.link}>No account yet? Click to here to sign up.</Text>
                 </TouchableWithoutFeedback>
             </View>
-
-
         </View>
     );
 }

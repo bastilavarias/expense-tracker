@@ -10,10 +10,8 @@ export default StyleSheet.create({
     fontWeight: "700",
   },
   link: {
-    color: "#3498db",
-    flex: 0,
     textAlign: "center",
-    marginHorizontal: "auto",
+    color: "#3498db",
   },
   container: {
     flex: 1,
