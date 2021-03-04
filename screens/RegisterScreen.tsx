@@ -32,7 +32,7 @@ export default function RegisterScreen({ navigation }: ScreenProps<"Register">) 
     }
 
     return (
-        <View style={utilStyle.container}>
+        <View style={{ ...utilStyle.container, ...utilStyle.center }}>
             <Text style={{ ...utilStyle.h1, ...utilStyle.mb1 }}>Sign Up</Text>
 
             <View style={formStyle.formGroup}>

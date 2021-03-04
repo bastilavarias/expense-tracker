@@ -1,16 +1,17 @@
 import React, { createContext, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { RegisterCredentials } from '../screens/RegisterScreen';
+import { LoginCredentials } from '../screens/LoginScreen';
 
 
-export const AuthContenxt = createContext<{
+export const AuthContext = createContext<{
     user: RegisterCredentials | null,
-    login: () => void
-    logout: () => void
+    onLogin: (user: LoginCredentials) => void
+    onLogout: () => void
 }>({
     user: null,
-    login: () => { },
-    logout: () => { }
+    onLogin: () => { },
+    onLogout: () => { }
 });
 
 interface AuthProviderProps {
@@ -20,24 +21,34 @@ interface AuthProviderProps {
 const AuthProvider = ({ children }: AuthProviderProps) => {
     const [user, setUser] = useState<RegisterCredentials | null>(null);
 
-    return (
-        <AuthContenxt.Provider value={{
-            user,
-            login: async () => {
-                setUser({
-                    password: 'dev123',
-                    username: 'topzdev',
-                    fullname: 'Christian Lugod'
-                })
 
-                await AsyncStorage.setItem('user', JSON.stringify(user))
-            },
-            logout: async () => {
+    const onLogin = ({ password, username }: LoginCredentials) => {
+        const loggedUser = {
+            password: 'dev123',
+            username: 'topzdev',
+            fullname: 'Christian Lugod'
+        }
+
+
+        if (username === 'topzdev' && password === 'dev123') {
+            AsyncStorage.setItem('user', JSON.stringify(loggedUser)).then(() => {
+                setUser(loggedUser);
+            })
+        }
+
+    }
+
+    return (
+        <AuthContext.Provider value={{
+            user,
+            onLogin,
+            onLogout: async () => {
                 await AsyncStorage.removeItem('user')
+                setUser(null)
             }
         }}>
             {children}
-        </AuthContenxt.Provider>
+        </AuthContext.Provider>
     )
 }
 

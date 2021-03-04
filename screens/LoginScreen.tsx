@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Alert, Text, View } from 'react-native';
 import { TextInput, TouchableHighlight, TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { AuthContext } from '../provider/AuthProvider';
 import { buttonStyle, formStyle, inputStyle, utilStyle } from '../styles';
 import { ScreenProps } from './ScreenParamList';
 
@@ -14,24 +15,16 @@ export default function loginscreen({ navigation, route }: ScreenProps<'Login'>)
         username: 'topzdev',
         password: 'dev123'
     })
+    const { onLogin } = useContext(AuthContext)
 
 
     const onChange = (prop: keyof LoginCredentials, value: string) => {
         setCredential(prevValue => ({ ...prevValue, [prop]: value }))
     }
 
-    const onLogin = () => {
-        const { username, password } = credentials;
-
-        if (username === 'topzdev' && password === 'dev123') {
-            navigation.navigate('Home')
-        } else {
-            Alert.alert('Error', 'Your username and password is invalid')
-        }
-    }
 
     return (
-        <View style={utilStyle.container}>
+        <View style={{ ...utilStyle.container, ...utilStyle.center }}>
             <Text style={{ ...utilStyle.h1, ...utilStyle.mb1 }}>Sign In</Text>
 
             <View style={formStyle.formGroup}>
@@ -41,7 +34,7 @@ export default function loginscreen({ navigation, route }: ScreenProps<'Login'>)
                 <TextInput secureTextEntry={true} textContentType="password" autoCompleteType="password" style={inputStyle.primaryInput} value={credentials.password} placeholder="Enter your password here" onChangeText={text => onChange('password', text)} />
             </View>
             <View style={formStyle.formGroup}>
-                <TouchableHighlight style={buttonStyle.primaryButton} onPress={onLogin}>
+                <TouchableHighlight style={buttonStyle.primaryButton} onPress={() => onLogin(credentials)}>
                     <Text>Login</Text>
                 </TouchableHighlight>
             </View>
