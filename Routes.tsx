@@ -14,21 +14,18 @@ const Stack = createStackNavigator<ScreenParamList>();
 
 export default function Routes() {
     const { user } = useContext(AuthContext);
-    const { fetchIncomeExpenses } = useContext(ExpenseIncomeContext);
+    // const { fetchIncomeExpenses } = useContext(ExpenseIncomeContext);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         AsyncStorage.getItem('user').then(userString => {
             if (userString) {
-                console.log('Type of user is: ', typeof userString, userString)
-                fetchIncomeExpenses();
                 setLoading(false)
             } else {
                 setLoading(false)
             }
         });
     }, [])
-    console.log(loading)
     if (loading) {
         return (
             <Center>
@@ -38,7 +35,6 @@ export default function Routes() {
         )
     }
 
-    console.log('Current User', user)
 
     return (
         <NavigationContainer>

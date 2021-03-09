@@ -79,7 +79,9 @@ const ExpenseIncomeProvider = ({ children }: ExpenseIncomeProviderProps) => {
 
     const computeIncomes = () => {
         let value = 0;
+        console.log('Computeing Incomes ================')
 
+        console.log(incomes.toString())
         incomes.forEach(item => {
             value += item.amount
         })
@@ -89,7 +91,9 @@ const ExpenseIncomeProvider = ({ children }: ExpenseIncomeProviderProps) => {
 
     const computeExpenses = () => {
         let value = 0;
+        console.log('Computeing Expenses ================')
 
+        console.log(expenses.toString())
         expenses.forEach(item => {
             value += item.amount
         })
@@ -112,14 +116,18 @@ const ExpenseIncomeProvider = ({ children }: ExpenseIncomeProviderProps) => {
     }
 
     const fetchIncomeExpenses = async () => {
+        console.clear()
         console.log('Fetching user income');
         const prevIncomes = await AsyncStorage.getItem('incomes');
         const prevExpenses = await AsyncStorage.getItem('expenses');
 
-        if (prevIncomes) setIncomes(JSON.parse(prevIncomes));
-        if (prevExpenses) setExpenses(JSON.parse(prevExpenses));
+        console.log('Logging from cache', prevIncomes, prevExpenses)
 
-        computeStatement();
+        if (prevIncomes) setIncomes(values => JSON.parse(prevIncomes));
+        if (prevExpenses) setExpenses(values => JSON.parse(prevExpenses));
+
+        console.log('Computing Statements ===============')
+        await computeStatement();
     }
 
     const saveExpenses = async () => {

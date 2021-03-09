@@ -6,6 +6,8 @@ export type ScreenParamList = {
   Register: undefined;
   Home: undefined;
   AddTransaction: undefined;
+  Income: undefined;
+  Expenses: undefined;
 };
 
 export type ScreenProps<T extends keyof ScreenParamList> = {
