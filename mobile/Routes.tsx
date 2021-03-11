@@ -9,6 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ActivityIndicator, Text } from 'react-native';
 import Center from './components/Center';
 import { ExpenseIncomeContext } from './provider/ExpenseIncomeProvider';
+import AppDrawer from './drawers/AppDrawer';
 
 const Stack = createStackNavigator<ScreenParamList>();
 
@@ -38,7 +39,8 @@ export default function Routes() {
 
     return (
         <NavigationContainer>
-            {user ? <AppStacks /> : <AuthStacks />}
+            {user ? <AppDrawer /> : <AuthStacks />}
+
         </NavigationContainer>
     )
 

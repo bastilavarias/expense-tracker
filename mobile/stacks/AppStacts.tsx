@@ -10,6 +10,7 @@ import HomeTabs from '../tabs/HomeTabs';
 
 const Stack = createStackNavigator<ScreenParamList>();
 
+
 export default function AppStacks() {
     const { onLogout } = useContext(AuthContext);
     const { fetchIncomeExpenses } = useContext(ExpenseIncomeContext);

@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { COLORS } from "../constants";
 
 export default StyleSheet.create({
   mb1: {
@@ -11,7 +12,7 @@ export default StyleSheet.create({
   },
   link: {
     textAlign: "center",
-    color: "#3498db",
+    color: COLORS.primary,
   },
   container: {
     flex: 1,

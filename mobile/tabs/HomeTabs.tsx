@@ -6,6 +6,7 @@ import ExpensesScreen from '../screens/ExpensesScreen';
 import IncomeScreen from '../screens/IncomeScreen';
 import { ScreenParamList } from '../screens/ScreenParamList';
 import { Ionicons } from '@expo/vector-icons';
+import { COLORS } from '../constants';
 
 const Tab = createBottomTabNavigator<ScreenParamList>();
 
@@ -23,7 +24,7 @@ const HomeTabs = () => {
             tabBarIcon: ({ focused, color, size }) => {
                 let iconName: any;
                 if (route.name === 'Income') {
-                    iconName = focused ? icons.income : icons.incomeOutline
+                    iconName = focused ? icons.incomeOutline : icons.income
                 } else if (route.name === 'Expenses') {
                     iconName = focused ? icons.expenses : icons.expensesOutline
                 }
@@ -31,7 +32,12 @@ const HomeTabs = () => {
                 return <Ionicons name={iconName} size={size} color={color} />
             },
 
-        })}>
+
+        })}
+            tabBarOptions={{
+                activeTintColor: COLORS.primary,
+            }}
+        >
             <Tab.Screen name="Expenses" component={ExpensesScreen} />
             <Tab.Screen name="Income" component={IncomeScreen} />
         </Tab.Navigator>
