@@ -1,20 +1,20 @@
-import React from 'react'
-import { GestureResponderEvent, StyleSheet, Text, TouchableHighlight, View } from 'react-native'
-import { buttonStyle } from '../styles'
 import { Ionicons } from '@expo/vector-icons'
+import React from 'react'
+import { StyleSheet, TouchableOpacityProps, View, TouchableOpacity } from 'react-native'
+import { buttonStyle } from '../styles'
 
-interface Props {
-    onPress: (event: GestureResponderEvent) => void
+interface Props extends TouchableOpacityProps {
     iconName: any
-}
+};
 
-const FloatingButton: React.FC<Props> = ({ onPress, iconName }) => {
+const FloatingButton: React.FC<Props> = (props) => {
+    const { iconName } = props;
     return (
-        <TouchableHighlight style={buttonStyle.floatingButton}>
+        <TouchableOpacity {...props} style={buttonStyle.floatingButton}>
             <View>
                 <Ionicons name={iconName} size={40} color={'white'} />
             </View>
-        </TouchableHighlight>
+        </TouchableOpacity>
     )
 }
 

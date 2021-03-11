@@ -7,6 +7,7 @@ import { ScreenParamList } from '../screens/ScreenParamList';
 import { createStackNavigator } from '@react-navigation/stack';
 import AddTransactionScreen from '../screens/AddTransactionScreen';
 import HomeTabs from '../tabs/HomeTabs';
+import CategoryModal from '../modals/CategoryModal';
 
 const Stack = createStackNavigator<ScreenParamList>();
 
@@ -16,16 +17,12 @@ export default function AppStacks() {
     const { fetchIncomeExpenses } = useContext(ExpenseIncomeContext);
 
     return (
-        <Stack.Navigator screenOptions={{
+        <Stack.Navigator mode="modal" initialRouteName="Category" screenOptions={{
             headerShown: false
         }}>
-            <Stack.Screen name="Home" component={HomeTabs} options={{
-                headerTitle: 'Home'
-            }} />
-            <Stack.Screen name="AddTransaction" component={AddTransactionScreen} options={{
-                headerTitle: 'Add Expenses'
-            }} />
-
+            <Stack.Screen name="Category" component={CategoryModal} />
+            <Stack.Screen name="Home" component={HomeTabs} />
+            <Stack.Screen name="AddTransaction" component={AddTransactionScreen} />
         </Stack.Navigator>
     )
 }

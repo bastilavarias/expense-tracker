@@ -1,6 +1,9 @@
-import { ExpenseIncomeType } from "../provider/ExpenseIncomeProvider";
+import {
+  CategoryType,
+  ExpenseIncomeType,
+} from "../provider/ExpenseIncomeProvider";
 
-export const CATEGORY = [
+export const CATEGORY: CategoryType[] = [
   {
     id: 1,
     name: "Foods & Drinks",
@@ -13,6 +16,21 @@ export const CATEGORY = [
   },
   {
     id: 3,
+    name: "Clothing",
+    icon: "shirt-outline",
+  },
+  {
+    id: 4,
+    name: "Clothing",
+    icon: "shirt-outline",
+  },
+  {
+    id: 5,
+    name: "Clothing",
+    icon: "shirt-outline",
+  },
+  {
+    id: 6,
     name: "Clothing",
     icon: "shirt-outline",
   },

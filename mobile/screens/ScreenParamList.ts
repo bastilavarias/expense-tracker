@@ -10,6 +10,7 @@ export type ScreenParamList = {
   Expenses: undefined;
   Settings: undefined;
   Profile: undefined;
+  Category: undefined;
 };
 
 export type ScreenProps<T extends keyof ScreenParamList> = {

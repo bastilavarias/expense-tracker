@@ -1,20 +1,18 @@
-import React, { useContext } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { FlatList, TouchableHighlight } from 'react-native-gesture-handler'
-import { AuthContext } from '../provider/AuthProvider'
-import { buttonStyle, utilStyle } from '../styles'
-import { ExpenseIncomeType, StatementType } from '../provider/ExpenseIncomeProvider'
-import { CATEGORY, COLORS } from '../constants';
-import StatementCard from '../components/StatementCard'
+import React from 'react'
+import { Text, View } from 'react-native'
+import { FlatList } from 'react-native-gesture-handler'
 import Container from '../components/Container'
-import HelloUser from '../components/HelloUser'
-import { EXPENSES_DUMMY } from '../constants/data'
 import FloatingButton from '../components/FloatingButton'
+import HelloUser from '../components/HelloUser'
+import StatementCard from '../components/StatementCard'
+import { COLORS } from '../constants'
+import { EXPENSES_DUMMY } from '../constants/data'
+import { ScreenProps } from './ScreenParamList'
 
-const ExpensesScreen = () => {
+const ExpensesScreen: React.FC<ScreenProps<'Expenses'>> = ({ navigation }) => {
 
     return (
-        <Container style={{ paddingTop: 60 }}>
+        <Container>
             <HelloUser />
 
             <View style={{ backgroundColor: COLORS.primary, borderRadius: 15, padding: 20, marginTop: 10 }} >
@@ -24,7 +22,7 @@ const ExpensesScreen = () => {
                     <Text style={{ fontSize: 30, fontWeight: 'bold' }}>12,560.00</Text>
                 </Text>
             </View>
-            <FloatingButton iconName="add" onPress={() => console.log('Hello')} />
+            <FloatingButton iconName="add" onPress={() => { console.log('Hello World'); navigation.navigate('AddTransaction') }} />
             <FlatList contentContainerStyle={{ paddingVertical: 20 }} data={EXPENSES_DUMMY} renderItem={({ item }) => <StatementCard item={item} />} keyExtractor={item => item.id!} />
         </Container>
     )

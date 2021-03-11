@@ -36,11 +36,11 @@ type ExpenseCategoryNo = 1;
 type IncomeCategoryNo = 1;
 
 export type CategoryType = {
-    id?: string,
+    id?: string | number,
     name: string,
-    iconsId: number,
-    colorHex: string
-    type: ExpenseCategoryNo | IncomeCategoryNo
+    icon: string,
+    colorHex?: string
+    type?: ExpenseCategoryNo | IncomeCategoryNo
 }
 
 export type StatementType = {

@@ -24,7 +24,6 @@ const StatementCard = ({ item }: { item: ExpenseIncomeType }) => {
                     height: 60,
                     width: 60,
                     backgroundColor: COLORS.primaryShade,
-
                     alignItems: 'center',
                     justifyContent: 'center',
                     marginRight: 15,

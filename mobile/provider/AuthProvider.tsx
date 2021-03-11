@@ -19,7 +19,12 @@ interface AuthProviderProps {
 }
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
-    const [user, setUser] = useState<RegisterCredentials | null>(null);
+    // added dummy data
+    const [user, setUser] = useState<RegisterCredentials | null>({
+        password: 'dev123',
+        username: 'topzdev',
+        fullname: 'Christian Lugod'
+    });
 
 
     const onLogin = ({ password, username }: LoginCredentials) => {

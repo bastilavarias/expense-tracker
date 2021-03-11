@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useCallback, useContext, useState } from 'react'
 import { View, Text, TextInput, TouchableHighlight, Button, Platform, Alert } from 'react-native'
 import { ScreenProps } from './ScreenParamList'
 import { ExpenseIncomeContext, ExpenseIncomeType } from '../provider/ExpenseIncomeProvider'
@@ -6,7 +6,7 @@ import { buttonStyle, formStyle, inputStyle, utilStyle } from '../styles'
 import { onChange } from 'react-native-reanimated'
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-const AddTransaction = ({ navigation }: ScreenProps<'AddTransaction'>) => {
+const AddTransaction: React.FC<ScreenProps<"AddTransaction">> = ({ navigation }) => {
     const { addExpense } = useContext(ExpenseIncomeContext)
     const [showDate, setShowDate] = useState(false);
     const [expense, setExpense] = useState<ExpenseIncomeType>({
@@ -26,6 +26,8 @@ const AddTransaction = ({ navigation }: ScreenProps<'AddTransaction'>) => {
         const currentDate = selectedDate || expense.date;
         onChange('date', currentDate)
     }
+
+    const showDatePicker = useCallback(() => { setShowDate(true) }, [setShowDate])
 
     const getAmount = () => {
         return expense.amount ? expense.amount.toString() : '';
@@ -55,7 +57,10 @@ const AddTransaction = ({ navigation }: ScreenProps<'AddTransaction'>) => {
                 <TextInput style={inputStyle.primaryInput} value={getCategory()} placeholder="Select Category" onChangeText={text => onChange('categoryId', text)} />
             </View>
             <View style={formStyle.formGroup}>
-                <Button disabled={showDate} onPress={() => setShowDate(true)} title="Set Date" />
+                <Button disabled={showDate} onPress={() => navigation.navigate('Category')} title="Category" />
+            </View>
+            <View style={formStyle.formGroup}>
+                <Button disabled={showDate} onPress={showDatePicker} title="Set Date" />
             </View>
             <View style={formStyle.formGroup}>
                 <TextInput style={inputStyle.primaryInput} value={expense.comment} placeholder="Comment" onChangeText={text => onChange('comment', text)} />
