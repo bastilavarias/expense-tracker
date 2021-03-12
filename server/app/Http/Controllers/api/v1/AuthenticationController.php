@@ -25,7 +25,6 @@ class AuthenticationController extends Controller
                 $validatorMessages,
                 ["name", "username", "password"]
             );
-            $test = "dfdf";
             return Helper::formatApiResponse(false, $errorMessage, null, 400);
         }
         $formData = [
