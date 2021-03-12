@@ -16,12 +16,11 @@ class CreateCashFlowsTable extends Migration
         Schema::create("cash_flows", function (Blueprint $table) {
             $table->id();
             $table->decimal("amount", 9, 3);
-            $table->index("cash_flow_category_id");
+            $table->unsignedBigInteger("cash_flow_category_id");
             $table
                 ->foreign("cash_flow_category_id")
                 ->references("id")
-                ->on("cash_flow_categories")
-                ->onDelete("cascade");
+                ->on("cash_flow_categories");
             $table->text("comment");
             $table->timestamps();
         });
